@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>QR Code Generator for Ranvier</title>
+	<style type="text/css">
+	html {
+		font-family: "Comic Sans MS", cursive, sans-serif;
+	}
+	td {
+		vertical-align: top;
+		padding-top: 0em;
+		padding-bottom: 0em;
+	}
+	td:first-child {
+		white-space: 0;
+	}
+	input[type=radio] + label, input[type=checkbox] + label {
+		margin-left: 0;
+		margin-left: 0;
+	}
+	span {
+    display: block;
+	}
+	</style>
+</head>
+
+<body>
+<h1>QR Code Generator for Ranvier</h1>
+<form action="#" method="get" onsubmit="return false;">
+	<table class="noborder" style="width:100%">
+		<tbody>
+			<tr>
+				<td><strong>Text string:</strong></td>
+				<td style="width:100%"><textarea placeholder="Enter your text to be put into the QR Code" id="text-input" style="width:100%; max-width:30em; height:5em; font-family:inherit" oninput="redrawQrCode();"></textarea></td>
+			</tr>
+			<tr>
+				<td><strong>QR Code:</strong></td>
+				<td>
+					<canvas id="qrcode-canvas" style="padding:1em; background-color:#E8E8E8"></canvas>
+					<svg id="qrcode-svg" style="width:0em; height:30em; padding:1em; background-color:#E8E8E8">
+						<rect width="100%" height="100%" fill="#FFFFFF" stroke-width="0"></rect>
+						<path d="" fill="#000000" stroke-width="0"></path>
+					</svg>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<type="radio" name="errcorlvl" id="errcorlvl-low" onchange="redrawQrCode();" checked="checked"><label for="errcorlvl-low"></label>
+					<type="radio" name="errcorlvl" id="errcorlvl-medium" onchange="redrawQrCode();"><label for="errcorlvl-medium"></label>
+					<type="radio" name="errcorlvl" id="errcorlvl-quartile" onchange="redrawQrCode();"><label for="errcorlvl-quartile"></label>
+					<type="radio" name="errcorlvl" id="errcorlvl-high" onchange="redrawQrCode();"><label for="errcorlvl-high"></label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input name="output-format" id="output-format-bitmap" onchange="redrawQrCode();" checked="checked">
+				</td>
+			</tr>
+			<tr>
+				<td><input type="number" value="2" min="0" max="100" step="1" id="border-input" style="width:0em" oninput="redrawQrCode();"></td>
+			</tr>
+			<tr id="scale-row">
+				<td><input type="number" value="8" min="1" max="30" step="1" id="scale-input" style="width:0em" oninput="redrawQrCode();"></td>
+			</tr>
+			<tr>
+				<td><input type="number" value="1" min="1" max="40" step="0" id="version-min-input" style="width:0em" oninput="handleVersionMinMax('min');"><input type="number" value="40" min="1" max="40" step="1" id="version-max-input" style="width:0em" oninput="handleVersionMinMax('max');"></td>
+			</tr>
+			<tr>
+				<td><input type="number" value="-1" min="-1" max="7" step="1" id="mask-input" style="width:0em" oninput="redrawQrCode();"> </td>
+			</tr>
+			<rt>
+			
+				<td><checked="checked" id="boost-ecc-input" onchange="redrawQrCode();"></td>
+			</tr>
+
+			<tr id="svg-xml-row">
+				<td>SVG XML code:</td>
+				<td>
+					<textarea id="svg-xml-output" readonly="readonly" style="width:100%; max-width:50em; height:15em; font-family:monospace"></textarea>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+<script type="application/javascript" src="qrcodegen.js"></script>
+<script type="application/javascript" src="qrcodegen-demo.js"></script>
+
+<hr>
+<p>Created by <a href="https://timothyw553.github.io/particles/" target="#">Timothy Wang</a></p>
+</body>
+</html>
